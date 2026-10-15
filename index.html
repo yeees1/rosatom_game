@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#f4f3ee">
+    <title>Атомные связи — игра на смысл</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./" aria-label="Атомные связи — главная"><span class="brand-mark">✳</span><span>АТОМНЫЕ<br>СВЯЗИ</span></a>
+    <div class="header-caption">ИСТОРИЯ. НАУКА. ЛЮДИ.</div>
+    <button class="text-button" id="rules-button">Как играть <span>↗</span></button>
+</header>
+<main>
+    <section class="intro">
+        <div>
+            <div class="eyebrow"><span class="dot"></span> ЭТАП 02 / КОД ПРОФЕССОРА</div>
+            <h1>Всё связано.<br><span>Найди пары.</span></h1>
+            <p>Соедини историю, науку и людей атомной отрасли.<br><span id="game-subtitle">Восемь связей. Четыре минуты. Ни одного слова.</span>
+            </p></div>
+        <div class="hero-atom" aria-hidden="true">
+            <svg viewBox="0 0 300 220">
+                <g fill="none" stroke="currentColor" stroke-width="1">
+                    <ellipse cx="150" cy="110" rx="130" ry="45" transform="rotate(-30 150 110)"/>
+                    <ellipse cx="150" cy="110" rx="130" ry="45" transform="rotate(30 150 110)"/>
+                    <ellipse cx="150" cy="110" rx="98" ry="42" transform="rotate(90 150 110)"/>
+                </g>
+                <circle cx="150" cy="110" r="10" fill="currentColor"/>
+                <circle cx="256" cy="42" r="7" fill="#e78446"/>
+                <circle cx="56" cy="51" r="5" fill="currentColor"/>
+            </svg>
+            <span>ОТ РЕАКТОРА ДО СООБЩЕСТВА</span></div>
+    </section>
+    <section class="game-layout" aria-label="Игра Атомные связи">
+        <aside class="control-panel">
+            <div class="panel-label">ВАША МИССИЯ</div>
+            <h2>Восстановить<br>атомные связи</h2>
+            <p class="mission">Профессор перепутал карточки. Найдите смысловые пары, чтобы получить фрагмент шифра от
+                его сейфа.</p>
+            <div class="timer-block">
+                <div class="panel-label">ОСТАЛОСЬ ВРЕМЕНИ</div>
+                <div id="timer" class="timer" role="timer" aria-label="Осталось 4 минуты">04<span>:</span>00</div>
+                <div class="time-track">
+                    <div id="time-fill"></div>
+                </div>
+            </div>
+            <div class="turn-block"><span class="turn-icon">↳</span>
+                <div><span class="panel-label">СЕЙЧАС ХОДИТ</span><strong id="player">Участник 1</strong></div>
+                <span id="turn-dots"></span></div>
+            <button class="primary" id="start-button">Начать игру <span>↗</span></button>
+            <button class="secondary" id="settings-button">Настроить игру</button>
+            <div class="silence-note"><span>◌</span>
+                <p><strong>Договоритесь без слов</strong><br>Жесты и указания разрешены.<br>Обсуждения и подсказки —
+                    нет.</p></div>
+            <div class="move-count"><span>Ходов <strong id="moves">0</strong></span><span>Ошибок <strong
+                    id="mistakes">0</strong></span></div>
+        </aside>
+        <div class="field">
+            <div class="field-heading">
+                <div><h2>Поле связей <span id="card-count">16 карточек</span></h2>
+                    <p id="instruction">Карточки закрыты. Начните, когда команда будет готова.</p></div>
+                <div class="live-pill" id="status-pill"><span></span> ГОТОВЫ К СТАРТУ</div>
+            </div>
+            <div id="board" class="board"></div>
+            <div class="board-foot"><span id="board-note">Выбирайте две карточки, связанные по смыслу.</span><span>01 + 01 = СВЯЗЬ</span>
+            </div>
+        </div>
+        <aside class="answers-panel">
+            <div class="answers-heading">
+                <div class="panel-label">ЗОНА ОТВЕТА</div>
+                <div><h2>Найденные пары</h2><span id="progress">0 / 8</span></div>
+            </div>
+            <div class="progress-track">
+                <div id="progress-fill"></div>
+            </div>
+            <div id="answers"></div>
+            <div class="fragment-preview"><span class="lock-icon">⌑</span>
+                <div><span class="panel-label">ФРАГМЕНТ ШИФРА № 2</span>
+                    <p id="fragment-note">Откроется после всех пар</p></div>
+            </div>
+        </aside>
+    </section>
+    <footer><span>АТОМНЫЕ СВЯЗИ / КОМАНДНАЯ ИГРА</span><span>От открытий прошлого — к людям будущего.</span></footer>
+</main>
+<dialog id="rules-dialog">
+    <button class="close" data-close aria-label="Закрыть">×</button>
+    <div class="eyebrow">КАК ИГРАТЬ</div>
+    <h2>Ищите смысл,<br>а не сходство.</h2>
+    <p>В начале все карточки лежат рубашкой вверх. Каждая имеет одну логическую пару: например, АЭС и лампочка — атомная
+        энергия превращается в электричество.</p>
+    <ol>
+        <li>За один ход участник последовательно открывает две карточки.</li>
+        <li>Правильная пара перемещается в зону ответа. Неверная через секунду переворачивается и остаётся на прежнем
+            месте. Её можно открыть в следующих ходах.
+        </li>
+        <li>После каждой попытки ход переходит к следующему участнику.</li>
+        <li>Соберите все пары до конца таймера, чтобы получить букву шифра.</li>
+    </ol>
+    <div class="rule-callout">Играйте молча. Можно показывать на карточки и общаться жестами. При игре за одним экраном
+        передавайте управление следующему участнику.
+    </div>
+    <button class="primary" data-close>Всё понятно <span>↗</span></button>
+</dialog>
+<dialog id="settings-dialog">
+    <button class="close" data-close aria-label="Закрыть">×</button>
+    <div class="eyebrow">ДЛЯ ВЕДУЩЕГО</div>
+    <h2>Соберите команду.</h2>
+    <form id="settings-form"><label>Количество участников<input name="players" type="number" min="1" step="1" value="1" required></label>
+    <label>Время игры, минут<input name="minutes" type="number" min="1" step="1" value="4" required></label>
+    <label>Сложность<select name="count">
+        <option value="8">Основной — 16 карточек</option>
+        <option value="6">Простой — 12 карточек</option>
+    </select></label><label>Буква шифра<input name="letter" maxlength="1" value="А" required autocomplete="off"></label>
+        <p class="small-note">В документе конкретная буква не указана. По умолчанию — «А». Ведущий может задать свою
+            перед началом игры.</p>
+        <button class="primary" type="submit">Сохранить настройки <span>↗</span></button>
+    </form>
+</dialog>
+<dialog id="end-dialog">
+    <div class="eyebrow" id="end-eyebrow"></div>
+    <div class="result-symbol" id="result-symbol"></div>
+    <h2 id="end-title"></h2>
+    <p id="end-text"></p>
+    <div id="result-stats" class="result-stats"></div>
+    <button class="primary" id="again-button">Сыграть ещё раз <span>↗</span></button>
+    <button class="secondary" data-close>Посмотреть поле</button>
+</dialog>
+<div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
